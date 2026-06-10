@@ -594,25 +594,59 @@ footer a{color:rgba(200,151,58,0.6);text-decoration:none}
           <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Coverage Amount</label>
           <select id="q-coverage" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;background:#fff;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'">
             <option value="">Select...</option>
-            <option value="100000">00,000</option>
-            <option value="150000">50,000</option>
-            <option value="200000">00,000</option>
-            <option value="250000">50,000</option>
-            <option value="300000">00,000</option>
-            <option value="400000">00,000</option>
-            <option value="500000">00,000</option>
-            <option value="750000">50,000</option>
-            <option value="1000000">,000,000</option>
+            <option value="25000">$25,000</option>
+            <option value="35000">$35,000</option>
+            <option value="45000">$45,000</option>
+            <option value="55000">$55,000</option>
+            <option value="65000">$65,000</option>
+            <option value="75000">$75,000</option>
+            <option value="85000">$85,000</option>
+            <option value="95000">$95,000</option>
+            <option value="105000">$105,000</option>
+            <option value="115000">$115,000</option>
+            <option value="125000">$125,000</option>
+            <option value="135000">$135,000</option>
+            <option value="145000">$145,000</option>
+            <option value="155000">$155,000</option>
+            <option value="165000">$165,000</option>
+            <option value="175000">$175,000</option>
+            <option value="185000">$185,000</option>
+            <option value="195000">$195,000</option>
+            <option value="205000">$205,000</option>
+            <option value="215000">$215,000</option>
+            <option value="225000">$225,000</option>
+            <option value="235000">$235,000</option>
+            <option value="245000">$245,000</option>
+            <option value="250000">$250,000</option>
+            <option value="300000">$300,000</option>
+            <option value="350000">$350,000</option>
+            <option value="400000">$400,000</option>
+            <option value="450000">$450,000</option>
+            <option value="500000">$500,000</option>
+            <option value="550000">$550,000</option>
+            <option value="600000">$600,000</option>
+            <option value="650000">$650,000</option>
+            <option value="700000">$700,000</option>
+            <option value="750000">$750,000</option>
+            <option value="800000">$800,000</option>
+            <option value="850000">$850,000</option>
+            <option value="900000">$900,000</option>
+            <option value="950000">$950,000</option>
+            <option value="1000000">$1,000,000</option>
           </select>
         </div>
         <div style="grid-column:1">
           <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Policy Type</label>
-          <select id="q-policy" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;background:#fff;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'">
+          <select id="q-policy" onchange="onPolicyChange(this.value)" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;background:#fff;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'">
             <option value="">Select...</option>
+            <option value="Mortgage Protection">Mortgage Protection</option>
             <option value="Term Life">Term Life</option>
             <option value="Whole Life">Whole Life</option>
             <option value="Universal Life">Universal Life</option>
           </select>
+          <div id="q-whole-life-warning" style="display:none;margin-top:0.5rem;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:0.6rem 0.85rem;font-size:0.83rem;color:#856404;line-height:1.5">
+            ⚠️ Whole Life policies cannot be quoted here — there is no fixed term. Please select <strong>Term Life</strong> or <strong>Mortgage Protection</strong> for an instant estimate, or <a href="https://calendly.com/eastagency/15min" style="color:#856404;font-weight:700">book a call</a> to discuss Whole Life options.
+          </div>
         </div>
         <div style="grid-column:2">
           <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Term Length</label>
@@ -678,6 +712,26 @@ function saveContact(){
 }
 </script>
 <script>
+function onPolicyChange(val) {
+  const warning = document.getElementById('q-whole-life-warning');
+  const termSelect = document.getElementById('q-term');
+  if (val === 'Whole Life') {
+    warning.style.display = 'block';
+    // Auto-set term to Whole Life and disable it
+    termSelect.value = 'Whole Life';
+    termSelect.disabled = true;
+    termSelect.style.opacity = '0.5';
+  } else {
+    warning.style.display = 'none';
+    termSelect.disabled = false;
+    termSelect.style.opacity = '1';
+    // Reset term if it was auto-set to Whole Life
+    if (termSelect.value === 'Whole Life' && val !== 'Whole Life') {
+      termSelect.value = '';
+    }
+  }
+}
+
 async function runQuote() {
   const first = document.getElementById('q-first').value.trim();
   const last = document.getElementById('q-last').value.trim();
@@ -696,6 +750,13 @@ async function runQuote() {
   errEl.style.display = 'none';
   resEl.style.display = 'none';
 
+  // Block Whole Life — can't quote
+  if (policy === 'Whole Life') {
+    errEl.textContent = 'Whole Life policies cannot be quoted here. Please select Term Life or Mortgage Protection, or book a call for Whole Life options.';
+    errEl.style.display = 'block';
+    return;
+  }
+
   if (!age || !gender || !health || !coverage || !policy || !term) {
     errEl.textContent = 'Please fill in all fields to get your estimate.';
     errEl.style.display = 'block';
@@ -710,7 +771,7 @@ async function runQuote() {
     const res = await fetch('https://superagent-d2904894.base44.app/functions/calculatePremium', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ age: Number(age), gender, health_status: health, smoker, coverage_amount: Number(coverage), term_length: term, policy_type: policy })
+      body: JSON.stringify({ age: Number(age), gender, health_status: health, smoker, coverage_amount: Number(coverage), term_length: term, policy_type: policy === 'Mortgage Protection' ? 'Term Life' : policy })
     });
     const data = await res.json();
     if (data.estimated_monthly_premium) {
