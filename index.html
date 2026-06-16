@@ -99,21 +99,110 @@ body{
 /* ──────────── HERO ──────────── */
 .hero{
   position:relative;overflow:hidden;
-  padding:6rem 1.25rem 0;
+  min-height:100svh;
+  display:flex;flex-direction:column;
   text-align:center;
-  background:radial-gradient(ellipse 90% 70% at 50% 0%,rgba(24,48,110,0.85) 0%,var(--navy-deep) 65%);
+  background:var(--navy-deep);
 }
-.hero-lines{position:absolute;inset:0;pointer-events:none;z-index:0;
-  background-image:repeating-linear-gradient(-45deg,transparent 0,transparent 30px,rgba(255,255,255,0.013) 30px,rgba(255,255,255,0.013) 31px)}
-.compass-bg{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);
-  width:380px;height:380px;opacity:0.05;pointer-events:none;z-index:0}
-.hero-card{
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('https://media.base44.com/images/public/6a281ed24f83faaed2904894/53a8d9a08_generated_image.png');
+  background-size:cover;background-position:center 30%;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(
+    160deg,
+    rgba(11,21,53,0.88) 0%,
+    rgba(11,21,53,0.72) 45%,
+    rgba(11,21,53,0.92) 100%
+  );
+}
+.hero-lines{position:absolute;inset:0;pointer-events:none;z-index:1;
+  background-image:repeating-linear-gradient(-45deg,transparent 0,transparent 30px,rgba(255,255,255,0.006) 30px,rgba(255,255,255,0.006) 31px)}
+.compass-bg{display:none}
+/* ── Full-width headline stage ── */
+.hero-stage{
   position:relative;z-index:2;
-  background:rgba(255,255,255,0.055);
-  border:1px solid rgba(255,255,255,0.16);
+  flex:0 0 auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:7.5rem 1.5rem 3.5rem;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold-light);border:1px solid var(--border-gold);
+  border-radius:20px;padding:5px 16px;margin-bottom:1.5rem;font-weight:700;
+  background:rgba(200,151,58,0.10);
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:inline-block;width:18px;height:1px;background:var(--gold);opacity:0.6}
+.hero-big-title{
+  font-size:clamp(34px,8vw,68px);font-weight:800;
+  color:var(--cream);line-height:1.1;
+  letter-spacing:-0.02em;
+  max-width:700px;margin:0 auto 0.75rem;
+  text-shadow:0 2px 24px rgba(0,0,0,0.55);
+}
+.hero-big-title em{
+  font-style:normal;
+  color:var(--gold-light);
+  font-family:'Great Vibes','Allura',cursive;
+  font-weight:400;
+  font-size:1.18em;
+  display:block;
+}
+.hero-subline{
+  font-size:clamp(14px,2.2vw,17px);
+  color:rgba(248,244,236,0.78);
+  line-height:1.65;
+  max-width:480px;margin:0 auto 2.25rem;
+}
+.hero-cta-row{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:2.75rem;
+}
+.hero-btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:15px 30px;border-radius:50px;
+  background:linear-gradient(165deg,#D9A840,#B8832A);
+  color:var(--navy-deep);font-weight:800;font-size:15px;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:0 4px 20px rgba(200,151,58,0.45);
+  transition:transform 0.15s,box-shadow 0.15s;
+}
+.hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,151,58,0.55)}
+.hero-btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:15px 30px;border-radius:50px;
+  background:rgba(255,255,255,0.08);
+  color:var(--cream);font-weight:700;font-size:15px;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,0.25);
+  backdrop-filter:blur(8px);
+  transition:transform 0.15s,background 0.15s;
+}
+.hero-btn-secondary:hover{transform:translateY(-2px);background:rgba(255,255,255,0.14)}
+.hero-trust-mini{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:16px;
+}
+.hero-trust-mini span{
+  font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  color:rgba(248,244,236,0.50);display:flex;align-items:center;gap:5px;
+}
+.hero-trust-mini span::before{content:'✓';color:var(--gold);font-size:11px}
+/* ── Profile card ── */
+.hero-card-wrap{
+  position:relative;z-index:2;
+  padding:0 1.25rem 0;
+}
+.hero-card{
+  position:relative;
+  background:rgba(11,21,53,0.85);
+  border:1px solid rgba(255,255,255,0.14);
   border-radius:22px;padding:2.25rem 1.75rem;
   max-width:380px;margin:0 auto;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),inset 0 -1px 0 rgba(0,0,0,0.25),0 8px 40px rgba(0,0,0,0.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.10),0 12px 50px rgba(0,0,0,0.6);
+  backdrop-filter:blur(16px);
 }
 .hero-card::before{content:'';position:absolute;top:-1px;left:18px;right:18px;height:2px;
   background:linear-gradient(90deg,transparent 0%,var(--gold) 40%,var(--gold-light) 50%,var(--gold) 60%,transparent 100%);
@@ -142,7 +231,6 @@ body{
 .hero-headline{font-size:clamp(16px,4.4vw,22px);font-weight:700;color:var(--cream);
   line-height:1.4;max-width:300px;margin:0 auto 0.75rem}
 .hero-body{font-size:13px;color:var(--on-dark-muted);line-height:1.78;max-width:300px;margin:0 auto 2rem}
-
 /* trust badges */
 .trust-row{
   display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
@@ -539,18 +627,36 @@ footer a{color:rgba(200,151,58,0.6);text-decoration:none}
 
 <!-- ══ HERO ══ -->
 <section class="hero tx" id="top">
+  <div class="hero-bg"></div>
   <div class="hero-lines"></div>
-  <svg class="compass-bg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
-    <circle cx="50" cy="50" r="46" stroke="#C8973A" stroke-width="1"/>
-    <circle cx="50" cy="50" r="42" stroke="#C8973A" stroke-width="0.5"/>
-    <path d="M50 6 L54 50 L50 94 L46 50 Z" fill="#E2AD50"/>
-    <path d="M6 50 L50 46 L94 50 L50 54 Z" fill="#E2AD50"/>
-    <path d="M22 22 L50 47 L78 78 L50 53 Z" fill="#C8973A"/>
-    <path d="M22 78 L50 53 L78 22 L50 47 Z" fill="#C8973A"/>
-    <circle cx="50" cy="50" r="5" fill="#0F1E4A" stroke="#E2AD50" stroke-width="1"/>
-  </svg>
 
-  <div class="hero-card">
+  <!-- Big cinematic headline stage -->
+  <div class="hero-stage">
+    <div class="hero-eyebrow">InstantCoverage.life</div>
+    <h1 class="hero-big-title">
+      Coverage Built Around<br>
+      <em>What Matters Most.</em>
+    </h1>
+    <p class="hero-subline">Independent agent. A-rated carriers. Real numbers in plain English — no medical exam on many plans, no pressure, no jargon.</p>
+    <div class="hero-cta-row">
+      <a href="#quote" class="hero-btn-primary">
+        &#9654; Get Your Free Quote
+      </a>
+      <a href="https://calendly.com/eastagency/15min" target="_blank" class="hero-btn-secondary">
+        &#128197; Book a 15-Min Call
+      </a>
+    </div>
+    <div class="hero-trust-mini">
+      <span>A-Rated Carriers</span>
+      <span>Licensed in 11 States</span>
+      <span>No Obligation</span>
+      <span>60-Second Quote</span>
+    </div>
+  </div>
+
+  <!-- Profile + quote card -->
+  <div class="hero-card-wrap">
+    <div class="hero-card">
     <div class="domain-pill">instantcoverage.life</div>
     <div class="avatar-outer">
       <div class="avatar-wrap">
@@ -586,9 +692,10 @@ footer a{color:rgba(200,151,58,0.6);text-decoration:none}
         <span class="ba">→</span>
       </a>
     </div>
+    </div>
   </div>
 
-  <svg class="wave-down" viewBox="0 0 400 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="margin-top:2.5rem">
+  <svg class="wave-down" viewBox="0 0 400 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="margin-top:2.5rem;position:relative;z-index:2">
     <path d="M0,40 L0,20 Q100,0 200,18 Q300,36 400,14 L400,40 Z" fill="#0B1535"/>
   </svg>
 </section>
@@ -763,146 +870,14 @@ footer a{color:rgba(200,151,58,0.6);text-decoration:none}
 
 <!-- ══ QUOTE IFRAME ══ -->
 <section class="light-sec tx" id="quote">
-  <div class="light-sec-inner" style="max-width:580px">
+  <div class="light-sec-inner" style="max-width:440px">
     <p class="ey-l">Your Instant Quote</p>
     <h2 class="hd-l">Get your <em>personalized numbers.</em></h2>
-    <p class="sub-l">Answer a few quick questions and see exactly what coverage costs. No obligation. No spam.</p>
-
-    <div style="background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(11,21,53,0.10);padding:2rem 1.5rem;margin-top:1.5rem">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-
-        <div style="grid-column:1">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">First Name</label>
-          <input id="q-first" type="text" placeholder="Brannon" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'"/>
-        </div>
-        <div style="grid-column:2">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Last Name</label>
-          <input id="q-last" type="text" placeholder="East" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'"/>
-        </div>
-        <div style="grid-column:1">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Email</label>
-          <input id="q-email" type="email" placeholder="you@email.com" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'"/>
-        </div>
-        <div style="grid-column:2">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Phone</label>
-          <input id="q-phone" type="tel" placeholder="678-555-0100" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'"/>
-        </div>
-        <div style="grid-column:1">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Age</label>
-          <input id="q-age" type="number" placeholder="35" min="18" max="80" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'"/>
-        </div>
-        <div style="grid-column:2">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Gender</label>
-          <select id="q-gender" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;background:#fff;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'">
-            <option value="">Select...</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div style="grid-column:1 / span 2">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Health Status</label>
-          <select id="q-health" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;background:#fff;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'">
-            <option value="">Select...</option>
-            <option value="Excellent">Excellent</option>
-            <option value="Good">Good</option>
-            <option value="Fair">Fair</option>
-            <option value="Poor">Poor</option>
-          </select>
-        </div>
-        <div style="grid-column:1 / span 2">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Tobacco / Smoker?</label>
-          <div style="display:flex;gap:1rem">
-            <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.95rem;cursor:pointer"><input type="radio" name="smoker" value="No" checked style="accent-color:#C8973A"/> No</label>
-            <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.95rem;cursor:pointer"><input type="radio" name="smoker" value="Yes" style="accent-color:#C8973A"/> Yes</label>
-          </div>
-        </div>
-        <div style="grid-column:1 / span 2">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Coverage Amount</label>
-          <select id="q-coverage" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;background:#fff;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'">
-            <option value="">Select...</option>
-            <option value="25000">$25,000</option>
-            <option value="35000">$35,000</option>
-            <option value="45000">$45,000</option>
-            <option value="55000">$55,000</option>
-            <option value="65000">$65,000</option>
-            <option value="75000">$75,000</option>
-            <option value="85000">$85,000</option>
-            <option value="95000">$95,000</option>
-            <option value="105000">$105,000</option>
-            <option value="115000">$115,000</option>
-            <option value="125000">$125,000</option>
-            <option value="135000">$135,000</option>
-            <option value="145000">$145,000</option>
-            <option value="155000">$155,000</option>
-            <option value="165000">$165,000</option>
-            <option value="175000">$175,000</option>
-            <option value="185000">$185,000</option>
-            <option value="195000">$195,000</option>
-            <option value="205000">$205,000</option>
-            <option value="215000">$215,000</option>
-            <option value="225000">$225,000</option>
-            <option value="235000">$235,000</option>
-            <option value="245000">$245,000</option>
-            <option value="250000">$250,000</option>
-            <option value="300000">$300,000</option>
-            <option value="350000">$350,000</option>
-            <option value="400000">$400,000</option>
-            <option value="450000">$450,000</option>
-            <option value="500000">$500,000</option>
-            <option value="550000">$550,000</option>
-            <option value="600000">$600,000</option>
-            <option value="650000">$650,000</option>
-            <option value="700000">$700,000</option>
-            <option value="750000">$750,000</option>
-            <option value="800000">$800,000</option>
-            <option value="850000">$850,000</option>
-            <option value="900000">$900,000</option>
-            <option value="950000">$950,000</option>
-            <option value="1000000">$1,000,000</option>
-          </select>
-        </div>
-        <div style="grid-column:1">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Policy Type</label>
-          <select id="q-policy" onchange="onPolicyChange(this.value)" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;background:#fff;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'">
-            <option value="">Select...</option>
-            <option value="Mortgage Protection">Mortgage Protection</option>
-            <option value="Term Life">Term Life</option>
-            <option value="Whole Life">Whole Life</option>
-            <option value="Universal Life">Universal Life</option>
-          </select>
-          <div id="q-whole-life-warning" style="display:none;margin-top:0.5rem;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:0.6rem 0.85rem;font-size:0.83rem;color:#856404;line-height:1.5">
-            ⚠️ Whole Life policies cannot be quoted here — there is no fixed term. Please select <strong>Term Life</strong> or <strong>Mortgage Protection</strong> for an instant estimate, or <a href="https://calendly.com/eastagency/15min" style="color:#856404;font-weight:700">book a call</a> to discuss Whole Life options.
-          </div>
-        </div>
-        <div style="grid-column:2">
-          <label style="font-size:0.75rem;font-weight:700;color:var(--navy-mid);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.3rem">Term Length</label>
-          <select id="q-term" style="width:100%;padding:0.65rem 0.85rem;border:1.5px solid #ddd;border-radius:8px;font-size:0.95rem;outline:none;background:#fff;transition:border 0.2s" onfocus="this.style.borderColor='#C8973A'" onblur="this.style.borderColor='#ddd'">
-            <option value="">Select...</option>
-            <option value="10 Years">10 Years</option>
-            <option value="20 Years">20 Years</option>
-            <option value="30 Years">30 Years</option>
-            <option value="Whole Life">Whole Life</option>
-          </select>
-        </div>
-      </div>
-
-      <button onclick="runQuote()" style="width:100%;margin-top:1.5rem;padding:0.9rem;background:linear-gradient(135deg,#C8973A,#E2AD50);color:#fff;font-weight:700;font-size:1rem;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.04em;transition:opacity 0.2s" onmouseover="this.style.opacity=0.9" onmouseout="this.style.opacity=1">
-        Get My Estimate →
-      </button>
-
-      <div id="q-result" style="display:none;margin-top:1.5rem;background:var(--navy-deep);border-radius:12px;padding:1.5rem;text-align:center">
-        <p style="color:var(--gold-pale);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.4rem">Estimated Monthly Premium</p>
-        <p id="q-price" style="color:#fff;font-size:2.8rem;font-weight:800;line-height:1"></p>
-        <p style="color:var(--on-dark-muted);font-size:0.8rem;margin-top:0.5rem">per month · estimate only</p>
-        <p style="color:var(--gold-pale);font-size:0.82rem;margin-top:1rem;line-height:1.6">Ready for your exact numbers? Let's talk — no pressure, no obligation.</p>
-        <a href="https://calendly.com/eastagency/15min" style="display:inline-block;margin-top:1rem;padding:0.7rem 1.5rem;background:var(--gold);color:#fff;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none">Book a Free 15-Min Call →</a>
-      </div>
-
-      <div id="q-error" style="display:none;margin-top:1rem;color:#c0392b;font-size:0.88rem;text-align:center"></div>
+    <p class="sub-l">Answer a few quick questions and see exactly what coverage costs — up to $1M, terms up to 20 years. No obligation. No spam.</p>
+    <div class="quote-frame">
+      <iframe src="https://superagent-d2904894.base44.app" title="Instant Life Insurance Quote" loading="lazy"></iframe>
     </div>
-
-    <p style="font-size:10px;color:var(--on-light-muted);text-align:center;margin-top:1rem;line-height:1.7">🔒 Your information is secure. Estimates based on standard rate tables. Actual premiums vary by carrier, state, and underwriting. Not a binding quote.</p>
+    <p style="font-size:11px;color:var(--on-light-muted);text-align:center;margin-top:1rem;line-height:1.7">🔒 Your information is secure. Not shared with third parties.</p>
   </div>
 </section>
 
@@ -1151,89 +1126,6 @@ function saveContact(){
   const t=document.getElementById('toast');
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),3000);
-}
-</script>
-<script>
-function onPolicyChange(val) {
-  const warning = document.getElementById('q-whole-life-warning');
-  const termSelect = document.getElementById('q-term');
-  if (val === 'Whole Life') {
-    warning.style.display = 'block';
-    termSelect.value = 'Whole Life';
-    termSelect.disabled = true;
-    termSelect.style.opacity = '0.5';
-  } else {
-    warning.style.display = 'none';
-    termSelect.disabled = false;
-    termSelect.style.opacity = '1';
-    if (termSelect.value === 'Whole Life' && val !== 'Whole Life') {
-      termSelect.value = '';
-    }
-  }
-}
-
-async function runQuote() {
-  const first = document.getElementById('q-first').value.trim();
-  const last = document.getElementById('q-last').value.trim();
-  const email = document.getElementById('q-email').value.trim();
-  const phone = document.getElementById('q-phone').value.trim();
-  const age = document.getElementById('q-age').value;
-  const gender = document.getElementById('q-gender').value;
-  const health = document.getElementById('q-health').value;
-  const smoker = document.querySelector('input[name="smoker"]:checked').value;
-  const coverage = document.getElementById('q-coverage').value;
-  const policy = document.getElementById('q-policy').value;
-  const term = document.getElementById('q-term').value;
-
-  const errEl = document.getElementById('q-error');
-  const resEl = document.getElementById('q-result');
-  errEl.style.display = 'none';
-  resEl.style.display = 'none';
-
-  if (policy === 'Whole Life') {
-    errEl.textContent = 'Whole Life policies cannot be quoted here. Please select Term Life or Mortgage Protection, or book a call for Whole Life options.';
-    errEl.style.display = 'block';
-    return;
-  }
-
-  if (!age || !gender || !health || !coverage || !policy || !term) {
-    errEl.textContent = 'Please fill in all fields to get your estimate.';
-    errEl.style.display = 'block';
-    return;
-  }
-
-  const btn = document.querySelector('#quote button');
-  btn.textContent = 'Calculating...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch('https://superagent-d2904894.base44.app/functions/calculatePremium', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ age: Number(age), gender, health_status: health, smoker, coverage_amount: Number(coverage), term_length: term, policy_type: policy === 'Mortgage Protection' ? 'Term Life' : policy })
-    });
-    const data = await res.json();
-    if (data.estimated_monthly_premium) {
-      document.getElementById('q-price').textContent = '$' + data.estimated_monthly_premium.toFixed(2);
-      resEl.style.display = 'block';
-      resEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      if (first || last || email || phone) {
-        fetch('https://superagent-d2904894.base44.app/functions/saveLead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ first_name: first, last_name: last, email, phone, age: Number(age), gender, health_status: health, smoker, coverage_amount: Number(coverage), term_length: term, policy_type: policy, estimated_monthly_premium: data.estimated_monthly_premium, status: 'New' })
-        }).catch(() => {});
-      }
-    } else {
-      throw new Error(data.error || 'Could not calculate premium');
-    }
-  } catch(e) {
-    errEl.textContent = 'Something went wrong. Please try again.';
-    errEl.style.display = 'block';
-  } finally {
-    btn.textContent = 'Get My Estimate →';
-    btn.disabled = false;
-  }
 }
 </script>
 </body>
