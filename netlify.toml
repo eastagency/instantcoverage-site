@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://mortgageprotection.netlify.app/*"
+  to = "https://www.instantcoverage.life/:splat"
+  status = 301
+  force = true
