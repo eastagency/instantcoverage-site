@@ -379,23 +379,50 @@ body{
 .hd-d em{font-style:normal;color:var(--gold-light)}
 .sub-d{font-size:14px;color:var(--on-dark-muted);text-align:center;
   line-height:1.65;max-width:400px;margin:0 auto 1.75rem}
-.carrier-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:1.25rem;
+/* ── CARRIER MARQUEE ── */
+.carrier-marquee-wrap{
+  width:100%;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
+  margin-top:1.75rem;
 }
-@media(min-width:560px){.carrier-grid{grid-template-columns:repeat(3,1fr)}}
-.carrier{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:10px;padding:14px 10px;
-  text-align:center;font-size:12px;font-weight:600;
-  color:var(--cream);letter-spacing:0.01em;line-height:1.3;
-  min-height:54px;display:flex;align-items:center;justify-content:center;
-  transition:border-color 0.15s,background 0.15s;
+.carrier-track{
+  display:flex;align-items:center;gap:32px;
+  width:max-content;
+  animation:marquee 30s linear infinite;
 }
-.carrier:hover{border-color:var(--border-gold);background:rgba(200,151,58,0.06)}
+.carrier-track:hover{animation-play-state:paused}
+@keyframes marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.carrier-logo-item{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(200,151,58,0.2);
+  border-radius:12px;
+  padding:14px 20px;
+  min-width:140px;height:72px;
+  transition:border-color 0.2s,background 0.2s;
+  flex-shrink:0;
+}
+.carrier-logo-item:hover{
+  border-color:rgba(200,151,58,0.6);
+  background:rgba(200,151,58,0.08);
+}
+.carrier-logo-item img{
+  max-height:36px;max-width:110px;
+  object-fit:contain;
+  filter:brightness(0) invert(1);
+  opacity:0.85;
+}
+.carrier-logo-item span{
+  font-size:11px;font-weight:700;color:var(--cream);
+  letter-spacing:0.04em;text-align:center;line-height:1.2;
+}
 .carrier-disclaimer{
   font-size:10px;color:var(--on-dark-muted);text-align:center;
-  margin-top:1.25rem;line-height:1.6;letter-spacing:0.02em;
+  margin-top:1.5rem;line-height:1.6;letter-spacing:0.02em;
 }
 
 /* ──────────── THE MATH ──────────── */
@@ -843,19 +870,129 @@ footer a{color:rgba(200,151,58,0.6);text-decoration:none}
     <h2 class="hd-d">A-Rated carriers. <em>Real claims-paying strength.</em></h2>
     <p class="sub-d">As an independent agent, I shop 20+ top carriers on your behalf — so you get real options and the freedom to choose.</p>
 
-    <div class="carrier-grid">
-      <div class="carrier">Mutual of Omaha</div>
-      <div class="carrier">Transamerica</div>
-      <div class="carrier">F&amp;G</div>
-      <div class="carrier">Americo</div>
-      <div class="carrier">Aetna</div>
-      <div class="carrier">Aflac</div>
-      <div class="carrier">Ethos</div>
-      <div class="carrier">National Life Group</div>
-      <div class="carrier">Lincoln Financial</div>
-      <div class="carrier">Corebridge Financial</div>
-      <div class="carrier">InstaBrain</div>
-      <div class="carrier" style="font-style:italic;opacity:0.7">+ many more</div>
+    <div class="carrier-marquee-wrap">
+      <div class="carrier-track">
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/mutualofomaha.com" alt="Mutual of Omaha" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Mutual of Omaha</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Mutual of Omaha</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/transamerica.com" alt="Transamerica" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Transamerica</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Transamerica</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/fglife.com" alt="F&amp;G" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">F&amp;G</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">F&amp;G</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/americo.com" alt="Americo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Americo</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Americo</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/aetna.com" alt="Aetna" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Aetna</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Aetna</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/aflac.com" alt="Aflac" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Aflac</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Aflac</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/ethoslife.com" alt="Ethos" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Ethos</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Ethos</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/nationallife.com" alt="National Life" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">National Life</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">National Life</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/lfg.com" alt="Lincoln Financial" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Lincoln Financial</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Lincoln Financial</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/corebridgefinancial.com" alt="Corebridge" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Corebridge</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Corebridge</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/foresters.com" alt="Foresters" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Foresters</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Foresters</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/pacificlife.com" alt="Pacific Life" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Pacific Life</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Pacific Life</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/mutualofomaha.com" alt="Mutual of Omaha" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Mutual of Omaha</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Mutual of Omaha</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/transamerica.com" alt="Transamerica" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Transamerica</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Transamerica</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/fglife.com" alt="F&amp;G" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">F&amp;G</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">F&amp;G</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/americo.com" alt="Americo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Americo</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Americo</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/aetna.com" alt="Aetna" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Aetna</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Aetna</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/aflac.com" alt="Aflac" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Aflac</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Aflac</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/ethoslife.com" alt="Ethos" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Ethos</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Ethos</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/nationallife.com" alt="National Life" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">National Life</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">National Life</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/lfg.com" alt="Lincoln Financial" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Lincoln Financial</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Lincoln Financial</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/corebridgefinancial.com" alt="Corebridge" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Corebridge</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Corebridge</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/foresters.com" alt="Foresters" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Foresters</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Foresters</span>
+      </div>
+      <div class="carrier-logo-item">
+        <img src="https://logo.clearbit.com/pacificlife.com" alt="Pacific Life" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" loading="lazy">
+        <span style="display:none">Pacific Life</span>
+        <span class="carrier-name-fallback" style="display:none;font-size:11px;font-weight:700;color:var(--cream)">Pacific Life</span>
+      </div>
+      </div>
     </div>
     <p class="carrier-disclaimer">All carriers rated A- to A+ by AM Best. Brokered through Family First Life, an Integrity company.</p>
   </div>
